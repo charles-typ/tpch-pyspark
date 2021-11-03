@@ -1,3 +1,6 @@
+# generated table files
+*.tbl
+
 # Prerequisites
 *.d
 
