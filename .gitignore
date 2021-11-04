@@ -5,7 +5,7 @@
 *.tbl
 
 # results files
-**/query_results
+**/results
 
 #################################
 # Python gitignore
