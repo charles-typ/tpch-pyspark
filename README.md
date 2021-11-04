@@ -1,6 +1,6 @@
 # TPC-H PySpark
 
-TPC-H benchmark implemented in PySpark (Spark 3.2.0 with in-built Hadoop 2.7) using the DataFrames API.
+TPC-H benchmark (3.2.0) implemented in PySpark (Spark 3.2.0 with in-built Hadoop 2.7) using the DataFrames API.
 
 
 ## Generating tables
@@ -27,3 +27,14 @@ which generates tables with extension `.tbl` with scale 1 (default) for a total 
 will generate roughly 10GB of input data.
 
 You can then either upload your data to hdfs or read them locally.
+
+
+## Running
+
+The following command will run query $1$ of TPC-H benchmark on Spark. 
+```bash
+python tpch_perf.py -q q1
+```
+
+For different queries, you can replace `q1` with other queries like `q2, q3 ..., q22`.  
+
