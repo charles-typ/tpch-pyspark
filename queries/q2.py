@@ -14,25 +14,26 @@ FROM    part,
         region
 WHERE   P_PARTKEY = PS_PARTKEY
 AND     S_SUPPKEY = PS_SUPPKEY
-AND     P_SIZE = : 1
-AND     P_TYPE LIKE '%:2'
+AND     P_SIZE = 15
+AND     P_TYPE LIKE '%BRASS'
 AND     S_NATIONKEY = N_NATIONKEY
 AND     N_REGIONKEY = R_REGIONKEY
-AND     R_NAME = ':3'
+AND     R_NAME = 'EUROPE'
 AND     PS_SUPPLYCOST = (
-            SELECT  MIN(PS_SUPPLYCOST)
-            FROM    PARTSUPP,
-                    SUPPLIER,
-                    NATION,
-                    REGION
-            WHERE   P_PARTKEY=PS_PARTKEY
-            AND     S_SUPPKEY=PS_SUPPKEY
-            AND     S_NATIONKEY=N_NATIONKEY
-            AND     N_REGIONKEY=R_REGIONKEY
-            AND     R_NAME=':3'
+            SELECT  min(PS_SUPPLYCOST)
+            FROM    partsupp,
+                    supplier,
+                    nation,
+                    region
+            WHERE   P_PARTKEY = PS_PARTKEY
+            AND     S_SUPPKEY = PS_SUPPKEY
+            AND     S_NATIONKEY = N_NATIONKEY
+            AND     N_REGIONKEY = R_REGIONKEY
+            AND     R_NAME = 'EUROPE'
         )
-ORDER BY    S_ACCTBAL DESC,
-            N_NAME,
-            S_NAME,
-            P_PARTKEY 
+ORDER BY  S_ACCTBAL desc,
+          N_NAME,
+          S_NAME,
+          P_PARTKEY
+LIMIT 100
 """
