@@ -1,44 +1,29 @@
--- $ID$
--- TPC-H/TPC-R National Market Share Query (Q8)
--- Functional Query Definition
--- Approved February 1998
-:x
-:o
-select
-	o_year,
-	sum(case
-		when nation = ':1' then volume
-		else 0
-	end) / sum(volume) as mkt_share
-from
-	(
-		select
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) as volume,
-			n2.n_name as nation
-		from
-			part,
-			supplier,
-			lineitem,
-			orders,
-			customer,
-			nation n1,
-			nation n2,
-			region
-		where
-			p_partkey = l_partkey
-			and s_suppkey = l_suppkey
-			and l_orderkey = o_orderkey
-			and o_custkey = c_custkey
-			and c_nationkey = n1.n_nationkey
-			and n1.n_regionkey = r_regionkey
-			and r_name = ':2'
-			and s_nationkey = n2.n_nationkey
-			and o_orderdate between date '1995-01-01' and date '1996-12-31'
-			and p_type = ':3'
-	) as all_nations
-group by
-	o_year
-order by
-	o_year;
-:n -1
+query = """
+SELECT  O_YEAR,
+        sum(CASE WHEN NATION='BRAZIL' THEN VOLUME ELSE 0 END) / sum(VOLUME) AS MKT_SHARE
+FROM    (
+                SELECT  EXTRACT(YEAR FROM O_ORDERDATE) AS O_YEAR,
+                        L_EXTENDEDPRICE * (1 - L_DISCOUNT) AS VOLUME,
+                        n2.N_NAME AS NATION
+                FROM    part,
+                        supplier,
+                        lineitem,
+                        orders,
+                        customer,
+                        nation n1,
+                        nation n2,
+                        region
+                WHERE   P_PARTKEY = L_PARTKEY
+                        AND S_SUPPKEY = L_SUPPKEY
+                        AND L_ORDERKEY = O_ORDERKEY
+                        AND O_CUSTKEY = C_CUSTKEY
+                        AND C_NATIONKEY = n1.N_NATIONKEY
+                        AND n1.N_REGIONKEY = R_REGIONKEY
+                        AND R_NAME = 'AMERICA'
+                        AND S_NATIONKEY = n2.N_NATIONKEY
+                        AND O_ORDERDATE BETWEEN '1995-01-01' AND '1996-12-31'
+                        AND P_TYPE = 'ECONOMY ANODIZED STEEL'
+        ) AS ALL_NATIONS
+GROUP BY    O_YEAR
+ORDER BY    O_YEAR
+"""

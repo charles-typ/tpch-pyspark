@@ -1,20 +1,11 @@
--- $ID$
--- TPC-H/TPC-R Promotion Effect Query (Q14)
--- Functional Query Definition
--- Approved February 1998
-:x
-:o
-select
-	100.00 * sum(case
-		when p_type like 'PROMO%'
-			then l_extendedprice * (1 - l_discount)
-		else 0
-	end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
-from
-	lineitem,
-	part
-where
-	l_partkey = p_partkey
-	and l_shipdate >= date ':1'
-	and l_shipdate < date ':1' + interval '1' month;
-:n -1
+query = """
+SELECT	100.00 * sum(CASE WHEN P_TYPE LIKE 'PROMO%'
+					 THEN L_EXTENDEDPRICE * (1 - L_DISCOUNT) 
+					 ELSE 0 END) / sum (L_EXTENDEDPRICE * (1 - L_DISCOUNT)) 
+					 AS PROMO_REVENUE
+FROM	lineitem,
+		part
+WHERE	L_PARTKEY = P_PARTKEY
+		AND L_SHIPDATE >= '1995-09-01'
+		AND L_SHIPDATE < '1995-10-01'
+"""

@@ -1,46 +1,31 @@
--- $ID$
--- TPC-H/TPC-R Suppliers Who Kept Orders Waiting Query (Q21)
--- Functional Query Definition
--- Approved February 1998
-:x
-:o
-select
-	s_name,
-	count(*) as numwait
-from
-	supplier,
-	lineitem l1,
-	orders,
-	nation
-where
-	s_suppkey = l1.l_suppkey
-	and o_orderkey = l1.l_orderkey
-	and o_orderstatus = 'F'
-	and l1.l_receiptdate > l1.l_commitdate
-	and exists (
-		select
-			*
-		from
-			lineitem l2
-		where
-			l2.l_orderkey = l1.l_orderkey
-			and l2.l_suppkey <> l1.l_suppkey
-	)
-	and not exists (
-		select
-			*
-		from
-			lineitem l3
-		where
-			l3.l_orderkey = l1.l_orderkey
-			and l3.l_suppkey <> l1.l_suppkey
-			and l3.l_receiptdate > l3.l_commitdate
-	)
-	and s_nationkey = n_nationkey
-	and n_name = ':1'
-group by
-	s_name
-order by
-	numwait desc,
-	s_name;
-:n 100
+query = """
+SELECT	S_NAME,
+		count(*) AS NUMWAIT
+FROM	supplier,
+		lineitem l1,
+		orders,
+		nation
+WHERE	S_SUPPKEY = l1.L_SUPPKEY
+		AND O_ORDERKEY = l1.L_ORDERKEY
+		AND O_ORDERSTATUS = 'F'
+		AND l1.L_RECEIPTDATE > l1.L_COMMITDATE
+		AND EXISTS(
+    		SELECT	*
+    		FROM	lineitem l2
+    		WHERE	l2.L_ORDERKEY = l1.L_ORDERKEY
+    				AND l2.L_SUPPKEY <> l1.L_SUPPKEY
+		)
+		AND NOT EXISTS(
+			SELECT	*
+			FROM	lineitem l3
+			WHERE	l3.L_ORDERKEY = l1.L_ORDERKEY
+					AND l3.L_SUPPKEY <> l1.L_SUPPKEY
+					AND l3.L_RECEIPTDATE > l3.L_COMMITDATE
+		)
+		AND S_NATIONKEY = N_NATIONKEY
+		AND N_NAME = 'SAUDI ARABIA'
+GROUP BY	S_NAME
+ORDER BY	NUMWAIT DESC,
+			S_NAME
+LIMIT 100
+"""

@@ -1,28 +1,15 @@
--- $ID$
--- TPC-H/TPC-R Order Priority Checking Query (Q4)
--- Functional Query Definition
--- Approved February 1998
-:x
-:o
-select
-	o_orderpriority,
-	count(*) as order_count
-from
-	orders
-where
-	o_orderdate >= date ':1'
-	and o_orderdate < date ':1' + interval '3' month
-	and exists (
-		select
-			*
-		from
-			lineitem
-		where
-			l_orderkey = o_orderkey
-			and l_commitdate < l_receiptdate
-	)
-group by
-	o_orderpriority
-order by
-	o_orderpriority;
-:n -1
+query = """
+SELECT  O_ORDERPRIORITY,
+		count(*) AS ORDER_COUNT
+FROM    orders
+WHERE   O_ORDERDATE >= '1993-07-01'
+		AND O_ORDERDATE < '1993-10-01'
+		AND EXISTS(
+	   	    SELECT *
+		    FROM lineitem
+		    WHERE	L_ORDERKEY = O_ORDERKEY
+					AND L_COMMITDATE < L_RECEIPTDATE
+	    )
+GROUP BY O_ORDERPRIORITY
+ORDER BY O_ORDERPRIORITY
+"""
