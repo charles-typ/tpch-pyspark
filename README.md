@@ -1,6 +1,6 @@
 # TPC-H PySpark
 
-TPC-H benchmark (3.2.0) implemented in PySpark (Spark 3.2.0 with in-built Hadoop 2.7) using the DataFrames API.
+TPC-H benchmark (3.0.0) implemented in PySpark (Spark 3.2.0 with in-built Hadoop 2.7) using the DataFrames API.
 
 
 ## Generating tables
@@ -38,3 +38,6 @@ python tpch_perf.py -q q1
 
 For different queries, you can replace `q1` with other queries like `q2, q3 ..., q22`.  
 
+## Queries and Answers
+
+All the reference queries (q1-q20) are provided in the *queries* folder, and the associate answers on the dataset with scale 1 (~1GB across all tables) are listed in the *answers* folder.
