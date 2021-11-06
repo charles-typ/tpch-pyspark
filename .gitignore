@@ -4,9 +4,6 @@
 # generated table files
 *.tbl
 
-# results files
-**/results
-
 #################################
 # Python gitignore
 #################################
