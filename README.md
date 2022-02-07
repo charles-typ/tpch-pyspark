@@ -40,4 +40,4 @@ For different queries, you can replace `q1` with other queries like `q2, q3 ...,
 
 ## Queries and Answers
 
-All the reference queries (q1-q20) are provided in the *queries* folder, and the associate answers on the dataset with scale 1 (~1GB across all tables) are listed in the *answers* folder.
+All the reference queries (q1-q22) are provided in the *queries* folder, and the associate answers on the dataset with scale 1 (~1GB across all tables) are listed in the *answers* folder.

@@ -126,13 +126,12 @@ def run_query(query, sc, query_name, result_path, open_mode='w+'):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--query', '-q', type=str,
-                        default='q1', required=True, help='query number')
+    parser.add_argument('--query', '-q', type=str, default='q1', help='indicate tpch query')
     args = parser.parse_args()
     query_select = args.query
 
-    DATA_PATH = '/home/ruiliu/Development/tpch-pyspark/dbgen/'
-    RESULT_PATH = '/home/ruiliu/Development/tpch-pyspark/answers/'
+    DATA_PATH = '/home/tpch-pyspark/dbgen/'
+    RESULT_PATH = '/home/tpch-pyspark/answers/'
     spark_sess, spark_ctx = conf_setup()
 
     read_table(spark_sess, spark_ctx)
