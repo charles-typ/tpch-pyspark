@@ -1,3 +1,7 @@
+# tpch-gen
+./dbgen/dbgen
+./dbgen/qgen
+
 # IDE
 **/.idea
 
