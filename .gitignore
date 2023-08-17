@@ -8,6 +8,9 @@ dbgen/qgen
 # generated table files
 *.tbl
 
+# generated answers
+*.answer
+
 #################################
 # Python gitignore
 #################################

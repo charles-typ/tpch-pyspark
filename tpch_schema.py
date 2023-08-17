@@ -7,7 +7,7 @@ from pyspark.sql.types import (
     DateType
 )
 
-schema_part = StructType([
+part_schema = StructType([
     StructField("P_PARTKEY", IntegerType(), nullable=False),
     StructField("P_NAME", StringType(), True),
     StructField("P_MFGR", StringType(), True),
@@ -19,7 +19,7 @@ schema_part = StructType([
     StructField("P_COMMENT", StringType(), True)
 ])
 
-schema_supplier = StructType([
+supplier_schema = StructType([
     StructField("S_SUPPKEY", IntegerType(), nullable=False),
     StructField("S_NAME", StringType(), True),
     StructField("S_ADDRESS", StringType(), True),
@@ -29,7 +29,7 @@ schema_supplier = StructType([
     StructField("S_COMMENT", StringType(), True)
 ])
 
-schema_partsupp = StructType([
+partsupp_schema = StructType([
     StructField("PS_PARTKEY", IntegerType(), nullable=False),
     StructField("PS_SUPPKEY", IntegerType(), False),
     StructField("PS_AVAILQTY", IntegerType(), True),
@@ -37,7 +37,7 @@ schema_partsupp = StructType([
     StructField("PS_COMMENT", StringType(), True)
 ])
 
-schema_customer = StructType([
+customer_schema = StructType([
     StructField("C_CUSTKEY", IntegerType(), nullable=False),
     StructField("C_NAME", StringType(), True),
     StructField("C_ADDRESS", StringType(), True),
@@ -48,7 +48,7 @@ schema_customer = StructType([
     StructField("C_COMMENT", StringType(), True),
 ])
 
-schema_orders = StructType([
+orders_schema = StructType([
     StructField("O_ORDERKEY", IntegerType(), nullable=False),
     StructField("O_CUSTKEY", IntegerType(), False),
     StructField("O_ORDERSTATUS", StringType(), True),
@@ -60,7 +60,7 @@ schema_orders = StructType([
     StructField("O_COMMENT", StringType(), True)
 ])
 
-schema_lineitem = StructType([
+lineitem_schema = StructType([
     StructField("L_ORDERKEY", IntegerType(), nullable=False),
     StructField("L_PARTKEY", IntegerType(), False),
     StructField("L_SUPPKEY", IntegerType(), False),
@@ -79,14 +79,14 @@ schema_lineitem = StructType([
     StructField("L_COMMENT", StringType(), True)
 ])
 
-schema_nation = StructType([
+nation_schema = StructType([
     StructField("N_NATIONKEY", IntegerType(), nullable=False),
     StructField("N_NAME", StringType(), True),
     StructField("N_REGIONKEY", IntegerType(), False),
     StructField("N_COMMENT", StringType(), True)
 ])
 
-schema_region = StructType([
+region_schema = StructType([
     StructField("R_REGIONKEY", IntegerType(), nullable=False),
     StructField("R_NAME", StringType(), True),
     StructField("R_COMMENT", StringType(), True)
