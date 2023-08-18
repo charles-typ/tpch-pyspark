@@ -33,10 +33,8 @@ You can then either upload your data to hdfs or read them locally.
 
 The following command will run query 1 of TPC-H benchmark on Spark. 
 ```bash
-python tpch_perf.py -q q1
+python tpch_perf.py -q <query-id, e.g., q1, q2> -d <data-path> -r <results-path>
 ```
-
-For different queries, you can replace `q1` with other queries like `q2, q3 ..., q22`.  
 
 ## Queries and Answers
 
